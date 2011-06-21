@@ -1,0 +1,9 @@
+{
+    "name": "Detected Tab Updater",
+    "version": "0.1.0",
+    "description": "Reloading detected tab displaying same URL to be opening without creating new tag.",
+    "icons": {"16": "icon16.png", "48": "icon48.png", "128": "icon128.png"},
+    "background_page": "background.html",
+    "options_page": "options.html",
+    "permissions": ["tabs", "notifications"]
+}

@@ -1,0 +1,3 @@
+chrome-detected-tab-updater
+
+You can use regex patterns like (\.|\/)google(\.)([^.]*) for URL Pattern. (then Use Regex value must be true)

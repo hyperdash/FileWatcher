@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>chrome-detected-tab-updater</title>
+    <link rel="stylesheet" type="text/css" href="css/options.css" />
+    <link rel="stylesheet" type="text/css" href="css/flexigrid.pack.css" />
+    <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="js/flexigrid.js"></script>
+    <script type="text/javascript" src="js/localstorage-util.js"></script>
+    <script type="text/javascript" language="JavaScript">
+$(document).ready(function() {
+    var lsutils = new LocalStorageUtil('urls');
+    lsutils.each(function(key, value) {
+        addRow(key, value);
+    });
+    $('.urls').flexigrid({
+        width: 'auto',
+        height: 'auto',
+        title: 'Target URLs or Patterns',
+        showToggleBtn: false,
+        buttons: [
+            {name: 'Add', bclass: 'add', onpress: function() {
+                lsutils.set(
+                        Date.now(),
+                        {regex: $('#addRegex').val(), pattern: $('#addPattern').val()}
+                );
+               location.reload();
+            }},
+            {name: 'Delete Selected Rows', bclass: 'delete', onpress: function() {
+                $('#urls').find('.trSelected').each(function(){
+                    lsutils.remove($(this).attr('id'));
+                    location.reload();
+                });
+            }}
+        ]
+    });
+    $('#fform').html('<span>URL Pattern: <input type="text" value="" size="43" maxlength="256" id="addPattern" /></span><span>Use Regex:<select id="addRegex"><option value="false" selected>false</option><option value="true">true</option></select></span>');
+});
+function addRow(key, value) {
+    var tr = $('<tr id=\'' + key + '\'>');
+    var pattern = $('<td>' + value.pattern + '</td>');
+    var regex = $('<td>' + value.regex + '</td>');
+    tr.append(pattern);
+    tr.append(regex);
+    $('#urls').append(tr);
+}
+    </script>
+</head>
+<body>
+<div>
+	<table class="urls">
+		<thead> 
+			<tr>
+				<th width="300">URL Pattern</th>
+                <th width="100">Use Regex</th>
+			</tr>
+		</thead>
+		<tbody id="urls">
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

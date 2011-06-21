@@ -1,0 +1,5 @@
+path:
+- /Users/kosaka_kazuhiro/Dev/Projects/WebStormProjects/ByteBuilder/ByteArray.js
+- /Users/kosaka_kazuhiro/Dev/Projects/WebStormProjects/ByteBuilder/test.html
+cmd:
+- open -g http://mixi.jp
